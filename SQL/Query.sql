@@ -55,4 +55,68 @@ SELECT t.Nome, p.Marca
 SELECT ft.Id_Funcionario, f.Nome, f.Cargo, f.Telemovel, t.Nome, t.Data_Inicio, t.Data_Fim
 	FROM Funcionario_Torneio ft
     INNER JOIN Funcionario f ON f.Id_Funcionario = ft.Id_Funcionario
-    INNER JOIN Torneio t ON t.Id_Torneio = ft.Id_Torneio
+    INNER JOIN Torneio t ON t.Id_Torneio = ft.Id_Torneio;
+
+-- Vista 1
+CREATE VIEW Pontuacoes_Individuais AS
+SELECT 
+    t.Nome AS Torneio,
+    a.Nome AS Atleta,
+    ci.Pontos
+FROM
+    Classificacao_Individual ci
+INNER JOIN
+    Torneio t ON t.Id_Torneio = ci.Id_Torneio
+INNER JOIN
+    Atleta a ON a.Id_Atleta = ci.Id_Atleta
+ORDER BY
+    t.Nome, ci.Pontos DESC;
+
+-- Vista 2
+CREATE VIEW Funcionarios_Torneios AS
+SELECT 
+    ft.Id_Funcionario, 
+    f.Nome AS Funcionario, 
+    f.Cargo, 
+    f.Telemovel, 
+    t.Nome AS Torneio, 
+    t.Data_Inicio, 
+    t.Data_Fim
+FROM 
+    Funcionario_Torneio ft
+INNER JOIN 
+    Funcionario f ON f.Id_Funcionario = ft.Id_Funcionario
+INNER JOIN 
+    Torneio t ON t.Id_Torneio = ft.Id_Torneio;
+
+-- Vista 3
+CREATE VIEW Atletas_Juvenis AS
+	SELECT
+    a.Id_Atleta AS "Id",
+    a.Nome,
+    a.Data_de_Nascimento AS "Data de Nascimento"
+	FROM Atleta a
+		WHERE
+		a.Faixa_Etaria = "Juvenil";
+        
+-- Vista 4        
+CREATE VIEW Atletas_Infantil AS
+	SELECT
+    a.Id_Atleta AS "Id",
+    a.Nome,
+    a.Data_de_Nascimento AS "Data de Nascimento"
+	FROM Atleta a
+		WHERE
+		a.Faixa_Etaria = "Infantil";
+
+-- Vista 5
+CREATE VIEW Atletas_Senior AS
+	SELECT
+    a.Id_Atleta AS "Id",
+    a.Nome,
+    a.Data_de_Nascimento AS "Data de Nascimento"
+    FROM Atleta a
+		WHERE
+        a.Faixa_Etaria = "Senior";
+
+SELECT * FROM Atletas_Juvenis;

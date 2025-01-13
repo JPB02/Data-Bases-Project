@@ -224,5 +224,14 @@ CREATE TABLE Espectador_Jogo (
 		FOREIGN KEY (Id_Espectador) REFERENCES Espectador(Id_Espectador) ON DELETE CASCADE,
 		FOREIGN KEY (Id_Jogo) REFERENCES Jogo(Id_Jogo) ON DELETE CASCADE
 )
-    ENGINE=InnoDB 
+    ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4;
+
+-- Indexação
+CREATE INDEX nome_do_torneio ON Torneio(Nome);
+CREATE INDEX data_inicio_torneio ON Torneio(Data_Inicio);
+CREATE INDEX data_fim_torneio ON Torneio(Data_Fim);
+
+CREATE INDEX data_jogo ON Jogo(Data_Jogo);
+  
+SHOW INDEX FROM Jogo;
